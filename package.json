@@ -10,15 +10,30 @@
   "description": "Tests for Azure REST API Specifications",
   "license": "MIT",
   "devDependencies": {
+  <<<<<<< dependabot/npm_and_yarn/node-fetch-2.6.7
+    "@azure/avocado": "^0.8.6",
+  =======
   <<<<<<< dependabot/npm_and_yarn/minimist-1.2.6
     "@azure/avocado": "^0.8.5",
   =======
     "@azure/avocado": "^0.8.6",
   >>>>>>> main
+  >>>>>>> main
     "@ts-common/commonmark-to-markdown": "^2.0.2",
     "@ts-common/fs": "0.2.0",
     "@ts-common/iterator": "^0.3.6",
     "@types/js-yaml": "^3.12.7",
+  <<<<<<< dependabot/npm_and_yarn/node-fetch-2.6.7
+    "@types/mocha": "^9.1.1",
+    "@types/prettier": "^2.6.3",
+    "js-yaml": "^3.14.1",
+    "json-schema-ref-parser": "^6.1.0",
+    "mocha": "^9.2.2",
+    "prettier": "^2.7.1",
+    "ts-node": "^10.8.1",
+    "tslib": "^1.14.1",
+    "typescript": "^3.9.10"
+  =======
   <<<<<<< dependabot/npm_and_yarn/minimist-1.2.6
     "@types/mocha": "^9.1.0",
     "@types/prettier": "^2.4.4",
@@ -45,6 +60,7 @@
     "ts-node": "^10.1.0",
     "tslib": "^1.10.0",
     "typescript": "^3.5.3"
+  >>>>>>> main
   >>>>>>> main
   >>>>>>> main
   },
