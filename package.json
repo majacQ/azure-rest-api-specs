@@ -20,10 +20,17 @@
     "js-yaml": "^3.14.1",
     "json-schema-ref-parser": "^6.1.0",
     "mocha": "^9.2.2",
+  <<<<<<< atomist/npm-update-main
     "prettier": "^2.6.2",
     "ts-node": "^10.8.1",
     "tslib": "^1.14.1",
     "typescript": "^3.9.10"
+  =======
+    "prettier": "^2.1.2",
+    "ts-node": "^10.1.0",
+    "tslib": "^1.10.0",
+    "typescript": "^3.5.3"
+  >>>>>>> main
   },
   "homepage": "https://github.com/azure/azure-rest-api-specs",
   "repository": {
