@@ -9,7 +9,7 @@ The App service RP comprises of services where each service has its own tag.
 Hence, each sub-service has its own swagger spec.
 
 All of them are tied together using this configuration and are packaged together into one compute client library.
-This makes it easier for customers to download one (nuget/npm/pip/maven/gem) compute client library package rather than installing individual packages for each sub service.
+This makes it easier for customers to download one (NuGet/npm/pip/maven/gem) compute client library package rather than installing individual packages for each sub service.
 
 
 ---
@@ -60,6 +60,8 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-js
+  - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## Go
@@ -95,9 +97,12 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2014-04-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.visualstudio.v2014_04_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/visualstudio/resource-manager/v2014_04_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/visualstudio/mgmt-v2014_04_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
+
+
+
 
 

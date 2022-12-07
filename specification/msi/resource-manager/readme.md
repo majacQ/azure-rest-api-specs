@@ -1,10 +1,13 @@
 # Managed Service Identity
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for Managed Service Identity.
 
 ---
+
 ## Getting Started
+
 To build the SDK for Managed Service Identity, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -12,19 +15,47 @@ To build the SDK for Managed Service Identity, simply [Install AutoRest](https:/
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
 ### Basic Information
+
 These are the global settings for the Managed Service Identity API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2015-08-31-preview
+tag: package-preview-2022-01
 ```
 
+
+### Tag: package-preview-2022-01
+
+These settings apply only when `--tag=package-preview-2022-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-01'
+input-file:
+  - Microsoft.ManagedIdentity/preview/2022-01-31-preview/ManagedIdentity.json
+```
+
+
+### Tag: package-preview-2021-09-30
+
+These settings apply only when `--tag=package-preview-2021-09-30` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-09-30'
+input-file:
+  - Microsoft.ManagedIdentity/preview/2021-09-30-preview/ManagedIdentity.json
+```
+### Tag: package-2018-11-30
+
+These settings apply only when `--tag=package-2018-11-30` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-11-30'
+input-file:
+- Microsoft.ManagedIdentity/stable/2018-11-30/ManagedIdentity.json
+```
 
 ### Tag: package-2015-08-31-preview
 
@@ -35,9 +66,21 @@ input-file:
 - Microsoft.ManagedIdentity/preview/2015-08-31-preview/ManagedIdentity.json
 ```
 
----
-# Code Generation
+## Suppression
 
+``` yaml
+directive:
+  - suppress: TrackedResourcePatchOperation
+    from: ManagedIdentity.json
+    where: $.definitions.SystemAssignedIdentity
+    reason: The identity type exposed under any scope is not a tracked resource since it is an extension.
+  - suppress: RequiredReadOnlySystemData
+    reason: User-assigned and system-assigned identities do not support systemData.
+```
+
+---
+
+# Code Generation
 
 ## Swagger to SDK
 
@@ -46,7 +89,8 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-net-track2
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-ruby
@@ -54,8 +98,13 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_msi']
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
+## Pyhton
+
+See configuration in [readme.python.md](./readme.python.md)
 
 ## C#
 
@@ -67,35 +116,8 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.ManagedServiceIdentity
-  output-folder: $(csharp-sdks-folder)/ManagedServiceIdentity/Management.ManagedServiceIdentity/Generated
+  output-folder: $(csharp-sdks-folder)/managedserviceidentity/Microsoft.Azure.Management.ManagedServiceIdentity/src/Generated
   clear-output-folder: true
-```
-
-## Python
-
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.msi
-  package-name: azure-mgmt-msi
-  clear-output-folder: true
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-msi/azure/mgmt/msi
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-msi
 ```
 
 ## Go
@@ -120,7 +142,21 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-msi
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2018-11-30
   - tag: package-2015-08-31-preview
+```
+
+### Tag: package-2018-11-30 and java
+
+These settings apply only when `--tag=package-2018-11-30 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-11-30' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.managedserviceidentity.v2018-11-30
+  output-folder: $(azure-libraries-for-java-folder)/sdk/managedserviceidentity/mgmt-v2018-11-30
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2015-08-31-preview and java
@@ -131,9 +167,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == 'package-2015-08-31-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.managedserviceidentity.v2015_08_31_preview
-  output-folder: $(azure-libraries-for-java-folder)/managedserviceidentity/resource-manager/v2015_08_31_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/managedserviceidentity/mgmt-v2015_08_31_preview
 regenerate-manager: true
 generate-interface: true
 ```
-
-

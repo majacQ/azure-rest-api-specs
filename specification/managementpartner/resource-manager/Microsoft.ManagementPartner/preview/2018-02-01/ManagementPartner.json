@@ -46,7 +46,7 @@
           }
         ],
         "tags": [
-          "partner"
+          "Partner"
         ],
         "responses": {
           "200": {
@@ -81,7 +81,7 @@
           }
         ],
         "tags": [
-          "partner"
+          "Partner"
         ],
         "responses": {
           "200": {
@@ -116,7 +116,7 @@
           }
         ],
         "tags": [
-          "partner"
+          "Partner"
         ],
         "responses": {
           "200": {
@@ -151,7 +151,7 @@
           }
         ],
         "tags": [
-          "partner"
+          "Partner"
         ],
         "responses": {
           "200": {
@@ -192,6 +192,40 @@
             "description": "List all the operations.",
             "schema": {
               "$ref": "#/definitions/OperationList"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.ManagementPartner/partners": {
+      "get": {
+        "summary": "Get a specific `Partner`.",
+        "description": "Get the management partner using the objectId and tenantId.",
+        "operationId": "Partners_Get",
+        "x-ms-examples": {
+          "GetPartnerDetails": {
+            "$ref": "./examples/GetPartnerDetailsNoPartnerId.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "tags": [
+          "Partners"
+        ],
+        "responses": {
+          "200": {
+            "description": "Get the details of the `Partner`.",
+            "schema": {
+              "$ref": "#/definitions/PartnerResponse"
             }
           },
           "default": {
@@ -257,7 +291,8 @@
           "description": "This is the object id."
         },
         "version": {
-          "type": "string",
+          "type": "integer",
+          "format": "int32",
           "description": "This is the version."
         },
         "updatedTime": {
@@ -283,16 +318,15 @@
       "enum": [
         "Active",
         "Deleted"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "ManagementPartnerState",
+        "modelAsString": true
+      }
     },
     "ErrorResponseCode": {
       "type": "string",
-      "description": "this is the error response code that management partner operations may return",
-      "enum": [
-        "NotFound",
-        "Conflict",
-        "BadRequest"
-      ]
+      "description": "this is the error response code that management partner operations may return"
     },
     "Error": {
       "type": "object",
@@ -301,6 +335,14 @@
         "error": {
           "$ref": "#/definitions/ExtendedErrorInfo",
           "description": "this is the ExtendedErrorInfo property"
+        },
+        "code": {
+          "$ref": "#/definitions/ErrorResponseCode",
+          "description": "this is the error response code"
+        },
+        "message": {
+          "type": "string",
+          "description": "this is the extended error info message"
         }
       }
     },
@@ -328,6 +370,9 @@
             "$ref": "#/definitions/OperationResponse",
             "description": "this is the operation response property"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "this is the operation response list"
         },
         "nextLink": {
@@ -365,7 +410,6 @@
         "resource": {
           "type": "string",
           "description": "the is management partner resource"
-
         },
         "operation": {
           "type": "string",

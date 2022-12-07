@@ -303,7 +303,7 @@
         ],
         "operationId": "OperationalizationClusters_UpdateSystemServices",
         "x-ms-examples": {
-          "Update System Services in an Operationalizaton Cluster": {
+          "Update System Services in an Operationalization Cluster": {
             "$ref": "examples/OperationalizationClusters_UpdateSystemServices.json"
           }
         },
@@ -520,7 +520,10 @@
         "location": {
           "description": "Specifies the location of the resource.",
           "type": "string",
-          "x-ms-mutability": ["create", "read"]
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "type": {
           "description": "Specifies the type of the resource.",
@@ -599,6 +602,9 @@
           "items": {
             "$ref": "#/definitions/ErrorResponseWrapper"
           },
+          "x-ms-identifiers": [
+            "/error/code"
+          ],
           "readOnly": true
         },
         "clusterType": {
@@ -698,14 +704,17 @@
           "description": "The system services deployed to the cluster",
           "items": {
             "$ref": "#/definitions/SystemService"
-          }
+          },
+          "x-ms-identifiers": [
+            "publicIpAddress"
+          ]
         },
         "masterCount": {
           "type": "integer",
           "description": "The number of master nodes in the container service.",
           "minimum": 1,
           "maximum": 5,
-          "default": 1        
+          "default": 1
         },
         "agentCount": {
           "type": "integer",
@@ -854,7 +863,7 @@
       "properties": {
         "etag": {
           "type": "string",
-          "description": "The configuartion ETag for updates."
+          "description": "The configuration ETag for updates."
         },
         "ssl": {
           "description": "The SSL configuration properties",
@@ -1173,7 +1182,10 @@
           "description": "An array of error detail objects.",
           "items": {
             "$ref": "#/definitions/ErrorDetail"
-          }
+          },
+          "x-ms-identifiers": [
+            "code"
+          ]
         }
       },
       "required": [
@@ -1208,7 +1220,10 @@
           "description": "An array of available operations.",
           "items": {
             "$ref": "#/definitions/ResourceOperation"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },

@@ -27,16 +27,16 @@ These are the global settings for the DevSpaces API.
 title: DevSpacesManagementClient
 description: Dev Spaces Client
 openapi-type: arm
-tag: package-2018-06-01-preview
+tag: package-2019-04-01
 ```
 
-### Tag: package-2018-06-01-preview
+### Tag: package-2019-04-01
 
-These settings apply only when `--tag=package-2018-06-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2019-04-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-06-01-preview'
+``` yaml $(tag) == 'package-2019-04-01'
 input-file:
-- Microsoft.DevSpaces/preview/2018-06-01-preview/devspaces.json
+- Microsoft.DevSpaces/stable/2019-04-01/devspaces.json
 ```
 
 
@@ -50,10 +50,12 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
+  - repo: azure-resource-manager-schemas
 ```
 
 ## C#
@@ -68,7 +70,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.DevSpaces
   payload-flattening-threshold: 2
-  output-folder: $(csharp-sdks-folder)/DevSpaces/Management.DevSpaces/Generated
+  output-folder: $(csharp-sdks-folder)/devspaces/Microsoft.Azure.Management.DevSpaces/src/Generated
   clear-output-folder: true
 ```
 
@@ -94,18 +96,28 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-devspaces
 
 ``` yaml $(java) && $(multiapi)
 batch:
-  - tag: package-2018-06-01-preview
+  - tag: package-2019-04-01
 ```
 
-### Tag: package-2018-06-01-preview and java
+### Tag: package-2019-04-01-preview and java
 
-These settings apply only when `--tag=2018-06-01-preview --java` is specified on the command line.
+These settings apply only when `--tag=2019-04-01 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag)=='package-2018-06-01-preview' && $(java) && $(multiapi)
+``` yaml $(tag)=='package-2019-04-01' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.devspaces.v2018_06_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/devspaces/resource-manager/v2018_06_01_preview
+  namespace: com.microsoft.azure.management.devspaces.v2019_04_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/devspaces/mgmt-v2019_04_01
 regenerate-manager: true
 generate-interface: true
+```
+
+
+
+## Suppression
+``` yaml
+directive:
+  - from: devspaces.json
+    suppress: OAV131 # DISCRIMINATOR_NOT_REQUIRED
+    reason: instanceType is a non-settable property from the client.
 ```

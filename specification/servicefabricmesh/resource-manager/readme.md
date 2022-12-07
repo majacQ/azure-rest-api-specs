@@ -32,7 +32,7 @@ tag: package-2018-09-01-preview
 
 directive:
   - suppress: RequiredPropertiesMissingInResourceModel
-    reason: Service is a proxy resource that is managed (created and updated) by including it in the application resource. The name is required by RP to manage those resources. The name is readOnly in the default resource schema so it is not serialized on the wire by AutoRest generated libraries. This is a bug on our RP and should be fixed. The inlined objects should be part of the application properties and not a seperate proxy resource.
+    reason: Service is a proxy resource that is managed (created and updated) by including it in the application resource. The name is required by RP to manage those resources. The name is readOnly in the default resource schema so it is not serialized on the wire by AutoRest generated libraries. This is a bug on our RP and should be fixed. The inlined objects should be part of the application properties and not a separate proxy resource.
   - suppress: EnumInsteadOfBoolean
     reason: The `readOnly` boolean schema is part of Azure Resource Manager common schema.
   - suppress: TrackedResourcePatchOperation
@@ -67,6 +67,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
@@ -75,6 +76,8 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_service_fabric_mesh']
+  - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 
@@ -88,7 +91,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.ServiceFabricMesh
   payload-flattening-threshold: 1
-  output-folder: $(csharp-sdks-folder)/ServiceFabric/Management.ServiceFabricMesh/Generated
+  output-folder: $(csharp-sdks-folder)/servicefabric/Microsoft.Azure.Management.ServiceFabricMesh/src/Generated
   clear-output-folder: true
 ```
 
@@ -150,7 +153,7 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == '2018-09-01-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.servicefabricmesh.v2018_09_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/servicefabricmesh/resource-manager/v2018_09_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/servicefabricmesh/mgmt-v2018_09_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -163,7 +166,10 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 ``` yaml $(tag) == '2018-07-01-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.servicefabricmesh.v2018_07_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/servicefabricmesh/resource-manager/v2018_07_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/servicefabricmesh/mgmt-v2018_07_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
+
+
+

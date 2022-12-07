@@ -2,11 +2,19 @@
 
 These settings apply only when `--go` is specified on the command line.
 
-``` yaml $(go)
+``` yaml $(go) && !$(track2)
 go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
+  license-header: MICROSOFT_MIT_NO_VERSION
   namespace: analysisservices
   clear-output-folder: true
+```
+
+``` yaml $(go) && $(track2)
+license-header: MICROSOFT_MIT_NO_VERSION
+module-name: sdk/resourcemanager/analysisservices/armanalysisservices
+module: github.com/Azure/azure-sdk-for-go/$(module-name)
+output-folder: $(go-sdk-folder)/$(module-name)
+azure-arm: true
 ```
 
 ### Go multi-api
@@ -20,7 +28,7 @@ batch:
 
 ### Tag: package-2017-08 and go
 
-These settings apply only when `--tag=package-2017-08 --go` is specifined on the command line.
+These settings apply only when `--tag=package-2017-08 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'package-2017-08' && $(go)

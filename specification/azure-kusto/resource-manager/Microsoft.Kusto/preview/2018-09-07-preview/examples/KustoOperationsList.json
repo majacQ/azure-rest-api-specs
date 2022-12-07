@@ -1,4 +1,4 @@
-﻿{
+{
   "parameters": {
     "api-version": "2015-04-08"
   },
@@ -12,7 +12,7 @@
               "provider": "providerName",
               "resource": "resourceName",
               "operation": "operationName",
-              "description": "description"
+              "description": "operation description for example, 'GET Cluster'"
             }
           }
         ]

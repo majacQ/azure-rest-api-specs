@@ -164,7 +164,7 @@
           {
             "name": "certificateDistinguishedName",
             "in": "body",
-            "description": "Distinguished name to to use for the certificate order.",
+            "description": "Distinguished name to use for the certificate order.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AppServiceCertificateOrder"
@@ -220,7 +220,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully deleted certificate order."
+            "description": "Successfully deleted certificate order."
           },
           "204": {
             "description": "Certificate order does not exist."
@@ -248,7 +248,7 @@
           {
             "name": "certificateDistinguishedName",
             "in": "body",
-            "description": "Distinguished name to to use for the certificate order.",
+            "description": "Distinguished name to use for the certificate order.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/AppServiceCertificateOrderPatchResource"
@@ -449,7 +449,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Succesfully deleted certificate."
+            "description": "Successfully deleted certificate."
           },
           "204": {
             "description": "Certificate does not exist."
@@ -867,7 +867,7 @@
       }
     },
     "AppServiceCertificateCollection": {
-      "description": "Collection of certitificateorder certificates.",
+      "description": "Collection of certificate order certificates.",
       "required": [
         "value"
       ],
@@ -1056,7 +1056,11 @@
                   "ExpirationNotInRenewalTimeRange",
                   "SubscriptionNotActive"
                 ],
-                "type": "string"
+                "type": "string",
+                "x-ms-enum": {
+                  "name": "ResourceNotRenewableReason",
+                  "modelAsString": true
+                }
               },
               "readOnly": true
             },
@@ -1072,7 +1076,7 @@
       }
     },
     "AppServiceCertificateOrderCollection": {
-      "description": "Collection of certitificate orders.",
+      "description": "Collection of certificate orders.",
       "required": [
         "value"
       ],
@@ -1261,7 +1265,11 @@
                   "ExpirationNotInRenewalTimeRange",
                   "SubscriptionNotActive"
                 ],
-                "type": "string"
+                "type": "string",
+                "x-ms-enum": {
+                  "name": "ResourceNotRenewableReason",
+                  "modelAsString": true
+                }
               },
               "readOnly": true
             },

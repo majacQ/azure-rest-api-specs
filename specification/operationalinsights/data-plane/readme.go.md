@@ -4,7 +4,7 @@ These settings apply only when `--go` is specified on the command line.
 
 ``` yaml $(go)
 go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
+  license-header: MICROSOFT_MIT_NO_VERSION
   clear-output-folder: true
   namespace: operationalinsights
 ```
@@ -23,4 +23,8 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag)=='v1' && $(go)
 output-folder: $(go-sdk-folder)/services/$(namespace)/v1/$(namespace)
+directive:
+  - from: swagger-document
+    where: $.definitions.table.properties.rows.items.items
+    transform: $.type = "object"
 ```
